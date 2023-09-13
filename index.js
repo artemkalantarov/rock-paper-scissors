@@ -15,71 +15,72 @@ function getComputerChoice() {
 }
 
 // Function prompts user for user's choice and returns it
-function getUserChoice() {
-
-    // Asks user for input answer to question and stores as local variable.
-    let userChoice = prompt("What is your choice? Rock, Paper or Scissors?");
-
+function getUserSelection(playerSelection) {
     //Capitalizes the answer
-    userChoice = (userChoice.charAt(0)).toUpperCase() + (userChoice.slice(1)).toLowerCase();
-
-    //Makes sure that user input is a valid option
-    if (userChoice === "Rock" || userChoice === "Paper" || userChoice === "Scissors") {
-        return userChoice;
-    } else {
-        console.log("Wrong answer. The answer must be only 'Rock', 'Paper', or 'Scissors'. The answer is not case sensitive,");
-        getUserChoice();
-    }
+    return (playerSelection.charAt(0)).toUpperCase() + (playerSelection.slice(1)).toLowerCase();
 }
 
 // Function checks who won the round by getting user's and computer's choice
 // User's or computer's score increases depending on who won
 // Returns an explanation of who won and what beat what
-function playRound(playerSelection, computerSelection) {
-    
+function playRound(playerSelection) {
+    playerSelection = getUserSelection(playerSelection);
+    const computerSelection = getComputerChoice();
     if (playerSelection === computerSelection) {
-        return `It is a tie! Both players had ${playerSelection}!`
+        resultText.textContent = `It is a tie! Both players had ${playerSelection}!`
     } else if ((playerSelection === "Rock" && computerSelection === "Scissors") ||
                 (playerSelection === "Scissors" && computerSelection === "Paper") ||
                 (playerSelection === "Paper" && computerSelection === "Rock")) {
         playerScore++            
         if (playerSelection === "Scissors"){
-            return `You won! ${playerSelection} beat ${computerSelection}!`
+            resultText.textContent = `You won! ${playerSelection} beat ${computerSelection}!`
         } else {
-            return `You won! ${playerSelection} beats ${computerSelection}!`
+            resultText.textContent = `You won! ${playerSelection} beats ${computerSelection}!`
         } 
     } else {
         computerScore++
         if (computerSelection === "Scissors"){
-            return `You lost! ${computerSelection} beat ${playerSelection}!`
+            resultText.textContent = `You lost! ${computerSelection} beat ${playerSelection}!`
         } else {
-            return `You lost! ${computerSelection} beats ${playerSelection}!`
+            resultText.textContent = `You lost! ${computerSelection} beats ${playerSelection}!`
         }
     }
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    gameOver(playerScore, computerScore);
   }
 
 // Function checks score at the end of the game and declares a winner
 // Function also states the final score
 function checkScore() {
     if (computerScore > playerScore) {
-        return `Game over! Computer won! Score: ${computerScore} : ${playerScore}`
+        return `Game over! Computer won!`
     } else if (playerScore > computerScore) {
-        return `Game over! You won! Score: ${playerScore} : ${computerScore}`
+        return `Game over! You won!`
     } else {
-        return `Game over! It is a tie! Score: ${playerScore} : ${computerScore}`
+        return `Game over! It is a tie!`
     }
 }
 
 // Function starts the game and runs it for 5 rounds
 // After all rounds are played, declares the winner
-function game() {
-    for (let i=1; i < 6; i++) {
-        const playerSelection = getUserChoice();
-        const computerSelection = getComputerChoice();
-        console.log(`Round: ${i}`)
-        console.log(playRound(playerSelection, computerSelection))
+function gameOver(playerScore, computerScore) {
+    if (playerScore === 5 || computerScore === 5) {
+        resultText.textContent = checkScore();
+        buttons.forEach(button => button.classList.add('hidden'));
+        replayButton.classList.remove('hidden');
     }
-    console.log(checkScore());
+    
+}
+
+function playAgain(){
+    computerScore = 0;
+    computerScoreDisplay.textContent = 0;
+    playerScore = 0;
+    playerScoreDisplay.textContent = 0;
+    resultText.textContent = "Ready to Play?"
+    buttons.forEach(button => button.classList.remove('hidden'));
+    replayButton.classList.add('hidden');
 }
 
 // Numeric variable for computer's score
@@ -87,8 +88,15 @@ let computerScore = 0
 
 // Numeric variable for player's score
 let playerScore = 0
-
-// Calls the function to start the game
-console.log(game());
-
+const buttonsContainer = document.querySelector('.buttons');
+const replayButton = document.querySelector('.replay-button');
+const resultText = document.querySelector('.result-text');
+const playerScoreDisplay = document.querySelector('.player-score');
+const computerScoreDisplay = document.querySelector('.computer-score');
+const buttons = document.querySelectorAll('.play-button');
+const allButtons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener("click", () => playRound(button.id)));
+allButtons.forEach(button => button.addEventListener("mouseover", () => button.classList.add('button-hover')));
+allButtons.forEach(button => button.addEventListener("mouseout", () => button.classList.remove('button-hover')));
+replayButton.addEventListener('click', () => playAgain());
 

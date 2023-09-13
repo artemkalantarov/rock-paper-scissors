@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #E5E7EB;
+    padding: 2em;
+    border-radius: 12px;
+}
+
+h3.result-text {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    gap: 2em;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    gap: 4em;
+}
+
+.player-container, .computer-container {
+    text-align: center;
+}
+
+.player-score, .computer-score {
+    font-size: large;
+    font-weight: bolder;
+}
+
+button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em;
+    border-radius: 12px;
+    background-color: white;
+    transition: all .07s ease;
+}
+
+button img {
+    width: 100px;
+    height: 100px;
+    
+}
+
+button p {
+    margin: 0;
+    margin-top: .5em;
+    text-align: center;
+    font-size: medium;
+
+}
+
+.button-hover {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+  }
+
+  .hidden {
+    display: none;
+  }
