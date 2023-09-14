@@ -94,9 +94,6 @@ const resultText = document.querySelector('.result-text');
 const playerScoreDisplay = document.querySelector('.player-score');
 const computerScoreDisplay = document.querySelector('.computer-score');
 const buttons = document.querySelectorAll('.play-button');
-const allButtons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener("click", () => playRound(button.id)));
-allButtons.forEach(button => button.addEventListener("mouseover", () => button.classList.add('button-hover')));
-allButtons.forEach(button => button.addEventListener("mouseout", () => button.classList.remove('button-hover')));
+buttons.forEach(button => button.addEventListener('click', () => playRound(button.id)));
 replayButton.addEventListener('click', () => playAgain());
 

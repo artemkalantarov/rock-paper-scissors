@@ -50,19 +50,14 @@ h1 {
 button {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     padding: .5em;
     border-radius: 12px;
     background-color: white;
-    transition: all .07s ease;
+    transition: all .07s ease-in-out;
+    min-width: 130px;
 }
 
-button img {
-    width: 100px;
-    height: 100px;
-    
-}
 
 button p {
     margin: 0;
@@ -72,12 +67,12 @@ button p {
 
 }
 
-.button-hover {
+button:hover {
     transform: scale(1.1);
     border-color: #ffc600;
     box-shadow: 0 0 1rem #ffc600;
   }
 
-  .hidden {
-    display: none;
-  }
+.hidden {
+display: none;
+}
